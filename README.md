@@ -1,9 +1,7 @@
 # Welcome to gulp-starter-kit 👋
+![Version 1.0.0](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000 "Version 1.0.0")
+[![Twitter: @javajunky](https://img.shields.io/twitter/follow/javajunky.svg?style=social "Twitter: @javajunky")](https://twitter.com/javajunky)
 
-  <img src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-  <a href="https://twitter.com/javajunky">
-    <img alt="Twitter: javajunky" src="https://img.shields.io/twitter/follow/javajunky.svg?style=social" target="_blank" />
-  </a>
 
 > Starter kit for project using Gulp workflow.
 

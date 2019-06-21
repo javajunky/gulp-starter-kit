@@ -8,3 +8,4 @@ Starter kit for using the  [Gulp](https://gulpjs.com/) workflow.
     * SCSS processing
     * JS minification
     * Markdown processing
+* ✏️ Editing README.md
