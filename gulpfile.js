@@ -6,6 +6,7 @@ var gulp = require('gulp'),
 	sourcemaps = require('gulp-sourcemaps'),
 	uglify = require('gulp-uglify'),
 	rename = require('gulp-rename'),
+	markdown = require('gulp-markdown'),
 	browserSync = require('browser-sync').create();
 
 var paths = {
@@ -18,6 +19,10 @@ var paths = {
 	scripts: {
 		src: 'app/js/*.js',
 		dest: 'app/js/min'
+	},
+	markdown: {
+		src: './*.md',
+		dest: './'
 	}
 	// Easily add additional paths
 	// ,html: {
@@ -66,6 +71,16 @@ function script() {
 	);
 }
 
+/** ===================================
+ * Process Markdown files
+ ===================================== */
+function markdownWatch() {
+	return gulp
+		.src([paths.markdown.src])
+		.pipe(markdown())
+		.pipe(gulp.dest(paths.markdown.dest));
+}
+
 // A simple task to reload the page
 function reload() {
 	browserSync.reload();
@@ -84,6 +99,7 @@ function watch() {
 	});
 	gulp.watch(paths.styles.src, style);
 	gulp.watch(paths.scripts.src, script);
+	gulp.watch(paths.markdown.src, markdownWatch);
 	// We should tell gulp which files to watch to trigger the reload
 	// This can be html or whatever you're using to develop your website
 	// Note -- you can obviously add the path to the Paths object
@@ -102,11 +118,12 @@ exports.watch = watch;
 // $ gulp style
 exports.style = style;
 exports.script = script;
+exports.markdown = markdownWatch;
 
 /*
  * Specify if tasks run in series or parallel using `gulp.series` and `gulp.parallel`
  */
-var build = gulp.parallel(style, script, watch);
+var build = gulp.parallel(markdownWatch, style, script, watch);
 
 /*
  * You can still use `gulp.task` to expose tasks

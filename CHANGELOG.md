@@ -7,3 +7,4 @@ Starter kit for using the  [Gulp](https://gulpjs.com/) workflow.
     * [BrowserSync](https://www.browsersync.io/docs/gulp)
     * SCSS processing
     * JS minification
+    * Markdown processing
