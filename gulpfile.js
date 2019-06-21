@@ -1,15 +1,16 @@
-var gulp = require('gulp'),
+const gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	postcss = require('gulp-postcss'),
 	autoprefixer = require('autoprefixer'),
 	cssnano = require('cssnano'),
 	sourcemaps = require('gulp-sourcemaps'),
 	uglify = require('gulp-uglify'),
+	concat = require('gulp-concat'),
 	rename = require('gulp-rename'),
 	markdown = require('gulp-markdown'),
 	browserSync = require('browser-sync').create();
 
-var paths = {
+const paths = {
 	styles: {
 		// By using styles/**/*.sass we're telling gulp to check all folders for any sass file
 		src: 'app/scss/*.scss',
@@ -24,12 +25,12 @@ var paths = {
 		src: './*.md',
 		dest: './'
 	}
-	// Easily add additional paths
-	// ,html: {
-	//  src: '...',
-	//  dest: '...'
-	// }
 };
+const lib_path = './app/js/lib/'; // path to vendor libraries
+
+/* List of JavaScript libraries in order of concatenation */
+const jslib_files = [lib_path + 'jquery-latest.min.js']; // set to [] if not loading any JavaScript files
+const js_src_array = jslib_files.concat(paths.scripts.src); // concats lib files with your JavaScript files
 
 /** ===================================
  * Process SCSS files
@@ -56,9 +57,11 @@ function style() {
  * Process JavaScript files
  ===================================== */
 function script() {
+	console.log(`js_src_array: ${js_src_array}`);
 	return (
 		gulp
-			.src([paths.scripts.src])
+			.src(js_src_array)
+			.pipe(concat('bundle.js'))
 			.pipe(uglify())
 			.pipe(
 				rename(function(path) {

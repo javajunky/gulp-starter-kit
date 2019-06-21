@@ -6,6 +6,12 @@ Starter kit for using the  [Gulp](https://gulpjs.com/) workflow.
 * ✨ Have set up the following in Gulp:
     * [BrowserSync](https://www.browsersync.io/docs/gulp)
     * SCSS processing
-    * JS minification
+        * Sourcemapping
+        * Autoprefixing
+        * Minifying
+    * JS processing
+        * Concatenating library scripts
+        * Minifying
     * Markdown processing
 * ✏️ Editing README.md
+* ✨ Included jQuery
