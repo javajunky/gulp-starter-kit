@@ -1,6 +1,10 @@
 # gulp-starter-kit
 Starter kit for using the  [Gulp](https://gulpjs.com/) workflow.
 
+## June 25, 2019
+* ✏️ Added start script to 'package.json'
+* ✨ Added a way specify a main SCSS file that imports all other SCSS files in 'gulpfile.js'
+
 ## June 21, 2019
 * 🚀 Initial code commit
 * ✨ Have set up the following in Gulp:
