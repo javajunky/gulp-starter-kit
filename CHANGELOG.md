@@ -4,6 +4,7 @@ Starter kit for using the  [Gulp](https://gulpjs.com/) workflow.
 ## June 25, 2019
 * ✏️ Added start script to 'package.json'
 * ✨ Added a way specify a main SCSS file that imports all other SCSS files in 'gulpfile.js'
+* ⬆️ Upgraded eslint package to  v6.0.1
 
 ## June 21, 2019
 * 🚀 Initial code commit
