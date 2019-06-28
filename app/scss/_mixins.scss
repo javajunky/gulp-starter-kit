@@ -1,0 +1,19 @@
+/** ==========================================================
+ * Mixins
+ *
+ * Place your mixins here.
+ ============================================================= */
+
+@mixin fullscreen {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: $app_w;
+	height: $app_h;
+}
+
+@mixin flex-centered {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

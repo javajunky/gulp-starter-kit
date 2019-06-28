@@ -1,7 +1,10 @@
+@import 'mixins';
 @import 'normalize';
 @import 'test';
 
 body {
-	background-color: pink;
+	background-color: rgb(204, 212, 182);
 	font-size: 20px;
+	@include flex-centered;
+	height: 100vh;
 }
