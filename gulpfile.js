@@ -4,12 +4,14 @@ const gulp = require('gulp'),
 	autoprefixer = require('autoprefixer'),
 	cssnano = require('cssnano'),
 	sourcemaps = require('gulp-sourcemaps'),
-	uglify = require('gulp-uglify'),
+	babel = require('gulp-babel'),
+	terser = require('gulp-terser'),
 	concat = require('gulp-concat'),
 	rename = require('gulp-rename'),
 	markdown = require('gulp-markdown'),
 	browserSync = require('browser-sync').create();
 
+const app_port = 3030;
 const app_base = './app';
 const paths = {
 	styles: {
@@ -65,8 +67,15 @@ function script() {
 	return (
 		gulp
 			.src(js_src_array)
+			.pipe(sourcemaps.init())
+			.pipe(
+				babel({
+					presets: ['@babel/env'],
+				})
+			)
 			.pipe(concat('bundle.js'))
-			.pipe(uglify())
+			.pipe(terser())
+			.pipe(sourcemaps.write())
 			.pipe(
 				rename(function(path) {
 					path.basename += '-min';
@@ -103,6 +112,7 @@ function watch() {
 		// If you are already serving your website locally using something like apache
 		// You can use the proxy setting to proxy that instead
 		// proxy: "yourlocal.dev"
+		port: app_port,
 	});
 	gulp.watch(paths.styles.src, style);
 	gulp.watch(paths.scripts.src, script);

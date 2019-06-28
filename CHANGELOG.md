@@ -8,6 +8,8 @@ Starter kit for using the  [Gulp](https://gulpjs.com/) workflow.
 * ✨ Added 'mixins.scss' file
 * ✏️ Updated 'index.html' and styling
 * ✏️ Updated 'README.md' file to be more descriptive
+* 📦 Replacing gulp-uglify with gulp-terser which handles `const` declarations
+* ✏️ Added custom port (3030) for BrowserSync
 
 ## June 25, 2019
 * ✏️ Added start script to 'package.json'
