@@ -12,27 +12,27 @@ const gulp = require('gulp'),
 
 const app_base = './app';
 const paths = {
-	'styles': {
+	styles: {
 		// If you have a main SCSS file that imports all your other SCSS files, or else set to empty string
-		'main': app_base + '/scss/main.scss',
+		main: `${app_base}/scss/main.scss`,
 		// By using styles/**/*.sass we're telling gulp to check all folders for any sass file
-		'src': app_base + '/scss/*.scss',
+		src: `${app_base}/scss/*.scss`,
 		// Compiled files will end up in whichever folder it's found in (partials are not compiled)
-		'dest': app_base + '/css'
+		dest: `${app_base}/css`,
 	},
-	'scripts': {
-		'src': app_base + '/js/*.js',
-		'dest': app_base + '/js/min'
+	scripts: {
+		src: `${app_base}/js/*.js`,
+		dest: `${app_base}/js/min`,
 	},
-	'markdown': {
-		'src': './*.md',
-		'dest': './'
-	}
+	markdown: {
+		src: './*.md',
+		dest: './',
+	},
 };
 const lib_path = './app/js/lib/'; // path to vendor libraries
 
 /* List of JavaScript libraries in order of concatenation */
-const jslib_files = [lib_path + 'jquery-latest.min.js']; // set to [] if not loading any JavaScript files
+const jslib_files = [`${lib_path}jquery-latest.min.js`]; // set to [] if not loading any JavaScript files
 const js_src_array = jslib_files.concat(paths.scripts.src); // concats lib files with your JavaScript files
 
 /** ===================================
@@ -61,7 +61,7 @@ function style() {
  * Process JavaScript files
  ===================================== */
 function script() {
-	console.log(`js_src_array: ${js_src_array}`);
+	// console.log(`js_src_array: ${js_src_array}`);
 	return (
 		gulp
 			.src(js_src_array)
@@ -97,9 +97,9 @@ function reload() {
 function watch() {
 	browserSync.init({
 		// You can tell browserSync to use this directory and serve it as a mini-server
-		'server': {
-			'baseDir': './app'
-		}
+		server: {
+			baseDir: './app',
+		},
 		// If you are already serving your website locally using something like apache
 		// You can use the proxy setting to proxy that instead
 		// proxy: "yourlocal.dev"
@@ -111,7 +111,7 @@ function watch() {
 	// This can be html or whatever you're using to develop your website
 	// Note -- you can obviously add the path to the Paths object
 	// gulp.watch("src/*.html", reload);
-	gulp.watch('app/*.html').on('change', browserSync.reload);
+	gulp.watch('app/*.html').on('change', reload);
 }
 
 // We don't have to expose the reload function
@@ -130,7 +130,7 @@ exports.markdown = markdownWatch;
 /*
  * Specify if tasks run in series or parallel using `gulp.series` and `gulp.parallel`
  */
-var build = gulp.parallel(markdownWatch, style, script, watch);
+const build = gulp.parallel(markdownWatch, style, script, watch);
 
 /*
  * You can still use `gulp.task` to expose tasks
