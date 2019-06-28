@@ -1,5 +1,5 @@
 # Welcome to gulp-starter-kit 👋
-![Version 1.0.1](https://img.shields.io/badge/version-1.0.1-blue.svg?cacheSeconds=2592000 "Version 1.0.1")
+![Version 1.0.2](https://img.shields.io/badge/version-1.0.2-blue.svg?cacheSeconds=2592000 "Version 1.0.2")
 [![Twitter: @javajunky](https://img.shields.io/twitter/follow/javajunky.svg?style=social "Twitter: @javajunky")](https://twitter.com/javajunky)
 
 
