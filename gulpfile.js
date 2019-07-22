@@ -1,15 +1,16 @@
-const gulp = require('gulp'),
-	sass = require('gulp-sass'),
-	postcss = require('gulp-postcss'),
-	autoprefixer = require('autoprefixer'),
-	cssnano = require('cssnano'),
-	sourcemaps = require('gulp-sourcemaps'),
-	babel = require('gulp-babel'),
-	terser = require('gulp-terser'),
-	concat = require('gulp-concat'),
-	rename = require('gulp-rename'),
-	markdown = require('gulp-markdown'),
-	browserSync = require('browser-sync').create();
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+const sourcemaps = require('gulp-sourcemaps');
+const babel = require('gulp-babel');
+const terser = require('gulp-terser');
+const concat = require('gulp-concat');
+const rename = require('gulp-rename');
+const markdown = require('gulp-markdown');
+const browserSync = require('browser-sync').create();
+const embedSvg = require('gulp-embed-svg');
 
 const app_port = 3030;
 const app_base = './app';
@@ -26,12 +27,16 @@ const paths = {
 		src: `${app_base}/js/*.js`,
 		dest: `${app_base}/js/min`,
 	},
+	markup: {
+		src: `${app_base}/app.html`,
+		dest: `${app_base}/`,
+	},
 	markdown: {
 		src: './*.md',
 		dest: './',
 	},
 };
-const lib_path = './app/js/lib/'; // path to vendor libraries
+const lib_path = `${app_base}/lib/`; // path to vendor libraries
 
 /* List of JavaScript libraries in order of concatenation */
 const jslib_files = [`${lib_path}jquery-latest.min.js`]; // set to [] if not loading any JavaScript files
@@ -88,6 +93,21 @@ function script() {
 }
 
 /** ===================================
+ * Process HTML files
+ ===================================== */
+function markup() {
+	return gulp
+		.src([paths.markup.src])
+		.pipe(
+			embedSvg({
+				root: app_base,
+			})
+		)
+		.pipe(rename('index.html'))
+		.pipe(gulp.dest(paths.markup.dest));
+}
+
+/** ===================================
  * Process Markdown files
  ===================================== */
 function markdownWatch() {
@@ -107,16 +127,17 @@ function watch() {
 	browserSync.init({
 		// You can tell browserSync to use this directory and serve it as a mini-server
 		server: {
-			baseDir: './app',
+			baseDir: app_base,
 		},
 		// If you are already serving your website locally using something like apache
 		// You can use the proxy setting to proxy that instead
 		// proxy: "yourlocal.dev"
 		port: app_port,
 	});
-	gulp.watch(paths.styles.src, style);
+	gulp.watch(`${app_base}/scss/*.scss`, style);
 	gulp.watch(paths.scripts.src, script);
 	gulp.watch(paths.markdown.src, markdownWatch);
+	gulp.watch(paths.markup.src, markup);
 	// We should tell gulp which files to watch to trigger the reload
 	// This can be html or whatever you're using to develop your website
 	// Note -- you can obviously add the path to the Paths object
@@ -136,11 +157,12 @@ exports.watch = watch;
 exports.style = style;
 exports.script = script;
 exports.markdown = markdownWatch;
+exports.markup = markup;
 
 /*
  * Specify if tasks run in series or parallel using `gulp.series` and `gulp.parallel`
  */
-const build = gulp.parallel(markdownWatch, style, script, watch);
+const build = gulp.parallel(markdownWatch, markup, style, script, watch);
 
 /*
  * You can still use `gulp.task` to expose tasks

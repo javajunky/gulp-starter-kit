@@ -18,6 +18,7 @@ npm start
 ```
 
 ## Getting Started
+* './app.html' is your main HTML file. It is processed and outputted to 'index.html'.
 * './js/main.js' is your main JavaScript file
 * Add all third-party script files into './js/lib/' and you can specify if you would want to bundle them with your 'main.js' file by modifying `jslib_files` in './gulpfile.js'
 * './scss/main.scss' is your main SCSS file

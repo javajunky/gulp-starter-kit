@@ -1,6 +1,12 @@
 # gulp-starter-kit
 Starter kit for using the  [Gulp](https://gulpjs.com/) workflow.
 
+## July 22, 2019
+* ✨ Added [gulp-embed-svg](https://www.npmjs.com/package/gulp-embed-svg) to include svg into 'index.html'.
+    * ⚠️ You must edit 'app.html' and that will generate 'index.html'
+* ✏️ Updated sample layout in 'app.html'
+* 🚚 Moved 'js/lib' folder to app base folder
+
 ## June 28, 2019
 * ✨ Using Wes Bos' [eslint-config-wesbos](https://github.com/wesbos/eslint-config-wesbos) setup
     * ✏️ Updated '.eslintrc' to work with new setup

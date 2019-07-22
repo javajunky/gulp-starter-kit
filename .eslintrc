@@ -1,16 +1,22 @@
 {
-	"extends": [ "wesbos" ],
+	"extends": [
+		"wesbos"
+	],
 	"rules": {
-		"no-console": 1,
+		"no-console": 2,
 		"no-undef": 1,
 		"camelcase": 0,
-		"one-var": "off",
-		"indent": [ "error", "tab" ],
+		"indent": [
+			"error",
+			"tab"
+		],
 		"prettier/prettier": [
 			"error",
 			{
 				"trailingComma": "es5",
 				"singleQuote": true,
+				"printWidth": 120,
+				"tabWidth": 2,
 				"useTabs": true
 			}
 		]

@@ -2,9 +2,14 @@
 @import 'normalize';
 @import 'test';
 
+* {
+	box-sizing: border-box;
+}
 body {
-	background-color: rgb(204, 212, 182);
+	background-color: #faf5e8;
 	font-size: 20px;
 	@include flex-centered;
 	height: 100vh;
+	border-top: 12px solid #d95557;
+	border-bottom: 15px solid #f6b464;
 }
