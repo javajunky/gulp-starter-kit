@@ -2,11 +2,11 @@
 	"name": "gulp-starter-kit",
 	"version": "1.0.1",
 	"description": "Starter kit using a Gulp.js workflow from Wil Chow",
-	"main": "index.js",
 	"scripts": {
 		"lint": "eslint .",
 		"lint:fix": "eslint . --fix",
-		"start": "gulp"
+		"start": "gulp",
+		"build": "gulp dist"
 	},
 	"keywords": [
 		"gulp",
@@ -52,6 +52,7 @@
 	},
 	"dependencies": {
 		"acorn": "^6.1.1",
-		"gulp-babel": "^8.0.0"
+		"gulp-babel": "^8.0.0",
+		"gulp-htmlmin": "^5.0.1"
 	}
 }

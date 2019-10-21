@@ -1,6 +1,11 @@
 # gulp-starter-kit
 Starter kit for using the  [Gulp](https://gulpjs.com/) workflow.
 
+## October 21, 2019
+* ✨ Added [gulp-htmlmin](https://www.npmjs.com/package/gulp-htmlmin) to minify HTML
+* ✨ Added a build task to create a 'dist' folder of files just for deploying
+* ✏️ Specified Google Chrome as the default browser
+
 ## July 22, 2019
 * ✨ Added [gulp-embed-svg](https://www.npmjs.com/package/gulp-embed-svg) to include svg into 'index.html'.
     * ⚠️ You must edit 'app.html' and that will generate 'index.html'

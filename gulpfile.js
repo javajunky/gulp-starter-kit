@@ -5,6 +5,7 @@ const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const sourcemaps = require('gulp-sourcemaps');
 const babel = require('gulp-babel');
+const htmlmin = require('gulp-htmlmin');
 const terser = require('gulp-terser');
 const concat = require('gulp-concat');
 const rename = require('gulp-rename');
@@ -14,6 +15,7 @@ const embedSvg = require('gulp-embed-svg');
 
 const app_port = 3030;
 const app_base = './app';
+const lib_path = `${app_base}/lib`; // path to vendor libraries
 const paths = {
 	styles: {
 		// If you have a main SCSS file that imports all your other SCSS files, or else set to empty string
@@ -36,10 +38,9 @@ const paths = {
 		dest: './',
 	},
 };
-const lib_path = `${app_base}/lib/`; // path to vendor libraries
 
 /* List of JavaScript libraries in order of concatenation */
-const jslib_files = [`${lib_path}jquery-latest.min.js`]; // set to [] if not loading any JavaScript files
+const jslib_files = [`${lib_path}/jquery-latest.min.js`]; // set to [] if not loading any JavaScript files
 const js_src_array = jslib_files.concat(paths.scripts.src); // concats lib files with your JavaScript files
 
 /** ===================================
@@ -103,7 +104,8 @@ function markup() {
 				root: app_base,
 			})
 		)
-		.pipe(rename('index.html'))
+		.pipe(rename('index.html')) // rename file to 'index.html'
+		.pipe(htmlmin({ collapseWhitespace: true })) // minify HTML
 		.pipe(gulp.dest(paths.markup.dest));
 }
 
@@ -129,6 +131,7 @@ function watch() {
 		server: {
 			baseDir: app_base,
 		},
+		browser: 'google chrome',
 		// If you are already serving your website locally using something like apache
 		// You can use the proxy setting to proxy that instead
 		// proxy: "yourlocal.dev"
@@ -142,7 +145,7 @@ function watch() {
 	// This can be html or whatever you're using to develop your website
 	// Note -- you can obviously add the path to the Paths object
 	// gulp.watch("src/*.html", reload);
-	gulp.watch('app/*.html').on('change', reload);
+	gulp.watch(`${app_base}/*.html`).on('change', reload);
 }
 
 // We don't have to expose the reload function
@@ -173,3 +176,19 @@ const build = gulp.parallel(markdownWatch, markup, style, script, watch);
  * Define default task that can be called by just running `gulp` from cli
  */
 gulp.task('default', build);
+
+/** ===================================
+ * Distributing
+ ===================================== */
+function copyFiles() {
+	const files = [
+		`${app_base}/index.html`,
+		`${app_base}/css/**/*.*`,
+		`${app_base}/js/min/**/*.*`,
+		`${app_base}/fonts/**/*.*`,
+		`${app_base}/images/**/*.*`,
+	]; // List out files and folders you wish to copy to 'dist/' folder
+	// console.log(files);
+	return gulp.src(files, { base: app_base }).pipe(gulp.dest('./dist'));
+}
+gulp.task('dist', copyFiles);
