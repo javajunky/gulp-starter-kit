@@ -51,7 +51,7 @@
 		"prettier": "^1.18.2"
 	},
 	"dependencies": {
-		"acorn": "^6.1.1",
+		"acorn": "^6.4.1",
 		"gulp-babel": "^8.0.0",
 		"gulp-htmlmin": "^5.0.1"
 	}
